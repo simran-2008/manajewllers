@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mana Jewellers | Fine Jewellery, Jandiala Guru</title>
+<meta name="description" content="Mana Jewellers, Mana Chowk, Jandiala Guru, Punjab. Gold, diamond, silver and bridal jewellery.">
+<meta name="theme-color" content="#0f0d0a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mana Jewellers | Fine Jewellery, Jandiala Guru">
+<meta property="og:description" content="Gold, diamond, silver and bridal jewellery, chosen with care at Mana Chowk, Jandiala Guru.">
+<meta property="og:image" content="https://unsplash.com/photos/aldDZePniqg/download?force=true&w=1200">
+<script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"JewelryStore","name":"Mana Jewellers",
+ "telephone":"+919872211117",
+ "address":{"@type":"PostalAddress","streetAddress":"Ghas Mandi Rd, near Mana Chowk","addressLocality":"Jandiala Guru","addressRegion":"Punjab","postalCode":"143115","addressCountry":"IN"}}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Noto+Sans+Gurmukhi:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ================= 1. DESIGN TOKENS ================= */
+  :root {
+    --ink: #0f0d0a;
+    --ink-soft: #1a1712;
+    --ivory: #f7f1e5;
+    --gold: #c9a24b;
+    --gold-light: #e8cf8f;
+    --muted: #a99f8a;
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Jost", system-ui, sans-serif;
+    --gurmukhi: "Noto Sans Gurmukhi", sans-serif;
+    --gutter: clamp(1.25rem, 5vw, 4rem);
+
+    /* roundness: change these three numbers to make the whole site softer or sharper */
+    --r-sm: 14px;     /* inputs, small items */
+    --r:    24px;     /* cards, panels */
+    --r-lg: 34px;     /* big cards, form, banner */
+    --shadow: 0 18px 50px -18px rgba(0, 0, 0, .75);
+    --glow: 0 0 0 1px rgba(201, 162, 75, .4), 0 24px 60px -20px rgba(201, 162, 75, .45);
+  }
+
+  /* ================= 2. BASE ================= */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    margin: 0; background: var(--ink); color: var(--ivory);
+    font-family: var(--sans); font-weight: 300; line-height: 1.7;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  img, svg, canvas, iframe { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  section { padding: clamp(4rem, 9vw, 8rem) var(--gutter); }
+  .wrap { max-width: 1150px; margin: 0 auto; }
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+
+  .eyebrow { font-size: .75rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.1; margin: 0; }
+  h2 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+  .gold-text {
+    background: linear-gradient(110deg, var(--gold-light), var(--gold) 50%, #8a6a22);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .divider { width: 70px; height: 1px; margin: 1.5rem 0; background: linear-gradient(90deg, var(--gold), transparent); }
+  .section-head { max-width: 600px; margin-bottom: 3.5rem; }
+  .section-head.center { margin-inline: auto; text-align: center; }
+  .section-head.center .divider { margin-inline: auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .section-head p { color: var(--muted); }
+
+  .btn {
+    display: inline-block; padding: .95rem 2.2rem; cursor: pointer;
+    font: 400 .8rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase;
+    border: 1px solid var(--gold); color: var(--gold-light); background: transparent;
+    transition: background .3s, color .3s;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--gold); color: var(--ink); }
+  .btn--solid { background: var(--gold); color: var(--ink); }
+  .btn--solid:hover { background: var(--gold-light); }
+  .btn[disabled] { opacity: .5; cursor: wait; }
+
+  /* ================= 3. HEADER ================= */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem var(--gutter);
+    transition: background .4s, padding .4s, border-color .4s;
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled { background: rgba(15,13,10,.92); backdrop-filter: blur(10px); padding-block: .8rem; border-color: rgba(201,162,75,.25); }
+  .logo { font-family: var(--serif); font-size: 1.5rem; letter-spacing: .08em; line-height: 1; }
+  .logo small { display: block; font: 400 .85rem var(--gurmukhi); color: var(--gold); letter-spacing: .05em; margin-top: .2rem; }
+  nav ul { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; align-items: center; }
+  nav a { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; transition: color .3s; }
+  nav a:hover { color: var(--gold-light); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--ivory); cursor: pointer; padding: .5rem; }
+  @media (max-width: 900px) {
+    .menu-btn { display: block; position: relative; z-index: 60; }
+    header nav {
+      position: fixed; inset: 0 0 0 auto; width: min(75vw, 300px);
+      background: var(--ink-soft); padding: 6rem 2rem;
+      transform: translateX(100%); transition: transform .4s; visibility: hidden;
+    }
+    header nav.open { transform: none; visibility: visible; }
+    nav ul { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+  }
+
+  /* ================= 4. HERO (with 3D canvas) ================= */
+  .hero {
+    min-height: 100svh; display: grid; align-items: center;
+    padding-top: 7rem; position: relative; overflow: hidden;
+    background:
+      radial-gradient(55% 55% at 72% 45%, rgba(201,162,75,.2), transparent 70%),
+      radial-gradient(40% 40% at 10% 95%, rgba(201,162,75,.08), transparent 70%),
+      var(--ink);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; opacity: .05; pointer-events: none;
+    background-image: linear-gradient(45deg, var(--gold) 1px, transparent 1px), linear-gradient(-45deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at 70% 50%, #000, transparent 70%);
+  }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 2rem; align-items: center; position: relative; }
+  .hero h1 { font-size: clamp(3rem, 7.5vw, 6rem); margin-bottom: 1.2rem; }
+  .hero p.lead { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted); max-width: 500px; margin: 0 0 2.4rem; }
+  .hero .cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .stage { position: relative; aspect-ratio: 1 / 1.05; width: 100%; max-width: 560px; margin-inline: auto; }
+  .stage canvas { width: 100%; height: 100%; cursor: grab; }
+  .stage .hint { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+    .hero p.lead { margin-inline: auto; }
+    .hero .cta { justify-content: center; }
+    .stage { max-width: 380px; order: -1; margin-top: 1rem; }
+    .hero { padding-top: 6rem; }
+  }
+
+  /* ================= 5. MARQUEE ================= */
+  .marquee { border-block: 1px solid rgba(201,162,75,.25); padding: 1.1rem 0; overflow: hidden; background: var(--ink-soft); }
+  .marquee-track { display: flex; gap: 3rem; width: max-content; animation: slide 30s linear infinite; }
+  .marquee span { font: italic 400 1.5rem var(--serif); color: var(--gold-light); white-space: nowrap; }
+  .marquee span::after { content: "\25C6"; font-size: .6rem; margin-left: 3rem; color: var(--gold); vertical-align: middle; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ================= 6. COLLECTIONS (photo cards, 3D tilt) ================= */
+  .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .tilt-wrap { perspective: 900px; }
+  .card {
+    position: relative; min-height: 400px; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem; overflow: hidden; border: 1px solid rgba(201,162,75,.25);
+    background: linear-gradient(160deg, #2a2417, #0b0906);   /* shown if a photo fails to load */
+    transform-style: preserve-3d; transition: transform .25s ease-out, border-color .4s;
+    will-change: transform;
+  }
+  .card:hover { border-color: var(--gold); }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s; }
+  .card:hover img { transform: scale(1.07); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,8,5,.92) 8%, rgba(10,8,5,.2) 60%); }
+  .card > div { position: relative; z-index: 1; transform: translateZ(40px); }
+  .card h3 { font-size: 1.9rem; margin-bottom: .3rem; }
+  .card p { margin: 0; color: #d6cdb8; font-size: .95rem; }
+
+  /* ================= 7. PARALLAX BAND ================= */
+  .band {
+    position: relative; text-align: center; padding-block: clamp(6rem, 14vw, 11rem);
+    background:
+      linear-gradient(rgba(10,8,5,.72), rgba(10,8,5,.82)),
+      url("https://unsplash.com/photos/aldDZePniqg/download?force=true&w=1600") center / cover fixed,
+      #14110c;
+  }
+  .band blockquote { margin: 0 auto; max-width: 760px; font: italic 400 clamp(1.7rem, 4vw, 2.8rem)/1.3 var(--serif); }
+  .band cite { display: block; margin-top: 1.5rem; font: 400 .75rem var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  @media (max-width: 900px) { .band { background-attachment: scroll; } }
+
+  /* ================= 8. OCCASIONS ================= */
+  .occasions { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .occ { padding: 0; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(201,162,75,.2); background: var(--ink-soft); transition: border-color .4s, transform .4s; }
+  .occ .ph { aspect-ratio: 4 / 3; overflow: hidden; background: linear-gradient(160deg, #2a2417, #0b0906); }
+  .occ .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s; }
+  .occ:hover .ph img { transform: scale(1.06); }
+  .occ .body { padding: 1.5rem 1.8rem 2rem; }
+  .occ:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .occ h3 { font-size: 1.6rem; margin: 0 0 .5rem; }
+  .occ p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  /* ================= 9. GALLERY ================= */
+  .gallery { display: grid; gap: 1rem; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; }
+  .gallery figure { margin: 0; position: relative; overflow: hidden; background: linear-gradient(160deg, #2a2417, #0b0906); border: 1px solid rgba(201,162,75,.15); }
+  .gallery figure:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery figure:nth-child(4) { grid-column: span 2; }
+  .gallery button { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s, filter .8s; filter: saturate(.9); }
+  .gallery figure:hover img { transform: scale(1.08); filter: saturate(1.15); }
+  @media (max-width: 760px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+    .gallery figure:nth-child(4) { grid-column: span 2; }
+  }
+  dialog.lb { border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh; overflow: visible; }
+  dialog.lb::backdrop { background: rgba(8, 6, 4, .92); }
+  dialog.lb img { max-width: 94vw; max-height: 86vh; width: auto; height: auto; margin: 0 auto; border-radius: var(--r); box-shadow: var(--shadow); }
+  dialog.lb p { margin: .8rem 0 0; text-align: center; color: var(--muted); font-size: .85rem; }
+  dialog.lb .close { position: absolute; top: -3rem; right: 0; padding: .6rem 1.2rem; font-size: .7rem; }
+  .credit { margin-top: 1rem; font-size: .75rem; color: var(--muted); }
+
+  /* ================= 10. ABOUT ================= */
+  .about { background: var(--ink-soft); }
+  .about .wrap { display: grid; gap: 4rem; grid-template-columns: 1fr 1fr; align-items: center; }
+  .about p { color: var(--muted); }
+  .about-photo { margin: 2rem 0 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r); border: 1px solid rgba(201,162,75,.25); background: linear-gradient(160deg, #2a2417, #0b0906); }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .values { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.8rem; }
+  .values li { padding-left: 1.6rem; border-left: 1px solid var(--gold); }
+  .values h3 { font-size: 1.4rem; margin-bottom: .2rem; }
+  .values p { margin: 0; font-size: .95rem; }
+  @media (max-width: 800px) { .about .wrap { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* ================= 11. BUYING GUIDE ================= */
+  .steps { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); counter-reset: step; }
+  .step { position: relative; padding: 2rem 1.5rem 1.5rem; border-top: 1px solid var(--gold); counter-increment: step; }
+  .step::before { content: "0" counter(step); font: 500 2.4rem/1 var(--serif); color: var(--gold); display: block; margin-bottom: .8rem; }
+  .step h3 { font-size: 1.4rem; margin-bottom: .4rem; }
+  .step p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  /* ================= 12. REVIEWS ================= */
+  .reviews { background: var(--ink-soft); }
+  .rating-box { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; align-items: center; justify-content: center; margin-bottom: 2.5rem; }
+  .score { font: 500 4.5rem/1 var(--serif); }
+  .stars { position: relative; display: inline-block; font-size: 1.5rem; letter-spacing: .15em; color: rgba(201,162,75,.25); }
+  .stars::before { content: "\2605\2605\2605\2605\2605"; }
+  .stars i { position: absolute; inset: 0; overflow: hidden; width: var(--fill, 62%); color: var(--gold); }
+  .stars i::before { content: "\2605\2605\2605\2605\2605"; }
+  .rating-meta { color: var(--muted); font-size: .9rem; }
+  .review-list { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 2.5rem; }
+  .review { padding: 2rem; border: 1px solid rgba(201,162,75,.25); background: var(--ink); }
+  .review p { margin: 1rem 0; font: italic 400 1.2rem/1.5 var(--serif); }
+  .review footer { padding: 0; border: 0; text-align: left; font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); }
+  .review-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  /* ================= 13. FAQ ================= */
+  .faq { max-width: 780px; margin-inline: auto; }
+  details { border-bottom: 1px solid rgba(201,162,75,.25); padding: 1.3rem 0; }
+  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem; font: 500 1.35rem var(--serif); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--gold); font-size: 1.6rem; line-height: 1; transition: transform .3s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { color: var(--muted); margin: .8rem 0 0; }
+
+  /* ================= 14. VISIT: MAP + FORM ================= */
+  .visit .wrap { display: grid; gap: 4rem; grid-template-columns: 1fr 1fr; align-items: start; }
+  @media (max-width: 900px) { .visit .wrap { grid-template-columns: 1fr; } }
+  .info { display: grid; gap: 1.4rem; margin: 2rem 0 0; }
+  .info dt { font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .info dd { margin: .2rem 0 0; }
+  .info a:hover { color: var(--gold-light); }
+  .map { margin-top: 2rem; border: 1px solid rgba(201,162,75,.3); overflow: hidden; }
+  .map iframe { width: 100%; height: 320px; border: 0; filter: grayscale(1) invert(.92) contrast(.9) hue-rotate(10deg); }
+
+  form { display: grid; gap: 1.2rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid rgba(201,162,75,.3); background: var(--ink-soft); }
+  .row { display: grid; gap: 1.2rem; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+  label { font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
+  input, select, textarea {
+    width: 100%; margin-top: .4rem; padding: .85rem 1rem; background: transparent; color: var(--ivory);
+    border: 1px solid rgba(201,162,75,.3); font: 300 1rem var(--sans); transition: border-color .3s;
+  }
+  select option { background: var(--ink); }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold-light); }
+  .hp { position: absolute; left: -9999px; }      /* honeypot field for spam bots */
+  .actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .status { min-height: 1.4em; margin: 0; font-size: .9rem; }
+  .status.ok { color: #9fd8a0; }
+  .status.err { color: #f0a0a0; }
+
+  /* ================= 15. FOOTER ================= */
+  footer.site { padding: 3rem var(--gutter); text-align: center; border-top: 1px solid rgba(201,162,75,.2); color: var(--muted); font-size: .85rem; }
+  footer.site .logo { display: inline-block; margin-bottom: 1rem; color: var(--ivory); }
+
+  /* ================= 16. ROUNDED + POLISH LAYER ================= */
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  /* buttons: pill shape, gold gradient, lift on hover */
+  .btn {
+    border-radius: 999px; padding: 1rem 2.4rem;
+    box-shadow: 0 10px 28px -12px rgba(201, 162, 75, .55);
+    transition: background .3s, color .3s, transform .3s, box-shadow .3s;
+  }
+  .btn:hover, .btn:focus-visible { transform: translateY(-3px); box-shadow: 0 16px 34px -12px rgba(201, 162, 75, .75); }
+  .btn--solid { background: linear-gradient(135deg, var(--gold-light), var(--gold) 55%, #a8832f); border-color: transparent; }
+  .btn--solid:hover { background: linear-gradient(135deg, #f3dfa6, var(--gold-light) 55%, var(--gold)); }
+
+  /* floating rounded header */
+  header { inset: .7rem .7rem auto .7rem; border-radius: 999px; padding-inline: clamp(1.2rem, 3vw, 2.2rem); border: 1px solid transparent; }
+  header.scrolled { box-shadow: var(--shadow); }
+  @media (max-width: 900px) { nav { border-radius: var(--r) 0 0 var(--r); } }
+
+  /* small pill labels */
+  .eyebrow {
+    display: inline-block; padding: .5rem 1.1rem; font-size: .68rem;
+    border: 1px solid rgba(201, 162, 75, .35); border-radius: 999px; background: rgba(201, 162, 75, .08);
+  }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; padding: 0; margin: 2.2rem 0 0; }
+  .chips li {
+    padding: .5rem 1.1rem; border-radius: 999px; font-size: .8rem; color: var(--gold-light);
+    border: 1px solid rgba(201, 162, 75, .3); background: rgba(201, 162, 75, .07);
+  }
+  @media (max-width: 860px) { .chips { justify-content: center; } }
+
+  /* hero: glowing orb + slow rotating dashed ring behind the 3D jewel */
+  .stage canvas { position: relative; z-index: 1; }
+  .stage::before, .stage::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+  .stage::before {
+    inset: 6%; background: radial-gradient(circle, rgba(201, 162, 75, .32), transparent 66%);
+    filter: blur(14px); animation: pulse 5s ease-in-out infinite;
+  }
+  .stage::after { inset: 1%; border: 1px dashed rgba(201, 162, 75, .28); animation: spin 60s linear infinite; }
+  @keyframes pulse { 50% { transform: scale(1.08); opacity: .75; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* marquee becomes a floating pill */
+  .marquee { margin: 0 var(--gutter); border: 1px solid rgba(201, 162, 75, .3); border-radius: 999px; box-shadow: var(--shadow); }
+
+  /* collection cards */
+  .card { border-radius: var(--r-lg); box-shadow: var(--shadow); }
+  .card:hover { box-shadow: var(--glow); }
+
+  /* quote band as a rounded panel */
+  .band { margin-inline: var(--gutter); padding-inline: 1.5rem; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); }
+
+  /* occasions */
+  .occ { border-radius: var(--r); background: linear-gradient(160deg, #221d14, #14110c); box-shadow: var(--shadow); }
+  .occ:hover { box-shadow: var(--glow); }
+
+  /* gallery */
+  .gallery figure { border-radius: var(--r); box-shadow: var(--shadow); }
+
+  /* about: soft panel instead of a flat full-width strip */
+  .about, .reviews { background: transparent; }
+  .about .wrap {
+    background: linear-gradient(160deg, #1d1912, #14110c); border: 1px solid rgba(201, 162, 75, .2);
+    border-radius: var(--r-lg); padding: clamp(2rem, 5vw, 4rem); box-shadow: var(--shadow);
+  }
+  .values li { padding: 1.2rem 1.5rem; border: 1px solid rgba(201, 162, 75, .25); border-left-width: 3px; border-radius: var(--r); background: rgba(201, 162, 75, .05); }
+
+  /* buying guide */
+  .step { border: 1px solid rgba(201, 162, 75, .25); border-radius: var(--r); background: rgba(201, 162, 75, .04); padding: 1.8rem 1.5rem 1.5rem; transition: transform .4s, border-color .4s; }
+  .step:hover { transform: translateY(-4px); border-color: var(--gold); }
+
+  /* reviews */
+  .rating-box { width: fit-content; margin-inline: auto; padding: 1.5rem 2.6rem; border-radius: var(--r-lg); border: 1px solid rgba(201, 162, 75, .3); background: var(--ink-soft); box-shadow: var(--shadow); }
+  .review { border-radius: var(--r); box-shadow: var(--shadow); }
+
+  /* FAQ as separate rounded cards */
+  details { border: 1px solid rgba(201, 162, 75, .25); border-radius: var(--r); padding: 1.1rem 1.6rem; margin-bottom: .9rem; background: var(--ink-soft); transition: border-color .3s; }
+  details[open], details:hover { border-color: var(--gold); }
+
+  /* visit section, map and form */
+  .map { border-radius: var(--r); box-shadow: var(--shadow); }
+  form { border-radius: var(--r-lg); box-shadow: var(--shadow); background: linear-gradient(160deg, #1d1912, #14110c); }
+  input, select, textarea { border-radius: var(--r-sm); background: rgba(255, 255, 255, .03); }
+  input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(201, 162, 75, .15); }
+
+  /* footer */
+  footer.site { background: var(--ink-soft); border-radius: var(--r-lg) var(--r-lg) 0 0; border-top: 1px solid rgba(201, 162, 75, .25); }
+
+  /* floating WhatsApp pill */
+  .float-wa {
+    position: fixed; right: 1rem; bottom: 1rem; z-index: 40; padding: .9rem 1.4rem; border-radius: 999px;
+    font: 500 .78rem/1 var(--sans); letter-spacing: .15em; text-transform: uppercase; color: var(--ink);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 14px 34px -10px rgba(201, 162, 75, .8);
+    transition: transform .3s;
+  }
+  .skip { position: absolute; left: 1rem; top: -4rem; z-index: 100; padding: .7rem 1.2rem; background: var(--gold); color: var(--ink); border-radius: 999px; transition: top .2s; }
+  .skip:focus { top: 1rem; }
+  .float-call { display: none; position: fixed; left: 1rem; bottom: 1rem; z-index: 40; padding: .9rem 1.4rem; border-radius: 999px; font: 500 .78rem/1 var(--sans); letter-spacing: .15em; text-transform: uppercase; color: var(--gold-light); background: var(--ink-soft); border: 1px solid var(--gold); box-shadow: var(--shadow); }
+  @media (max-width: 900px) { .float-call { display: block; } }
+  footer.site nav { margin: 0 0 1.2rem; }
+  footer.site nav ul { justify-content: center; flex-direction: row; flex-wrap: wrap; gap: 1.4rem; }
+  .float-wa:hover { transform: translateY(-3px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage::before, .stage::after { animation: none; }
+    .btn, .step, .float-wa { transition: none; }
+  }
+
+  /* ================= 17. REVEAL + REDUCED MOTION ================= */
+  .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s, transform .9s; }
+  .js .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .marquee-track { animation: none; }
+    .card, .card img, header nav { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#collections">Skip to content</a>
+
+<header id="top">
+  <a href="#top" class="logo" aria-label="Mana Jewellers, home">MANA JEWELLERS<small lang="pa">ਮਾਨਾ ਜਿਵੈਲਰਸ</small></a>
+  <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+  </button>
+  <nav id="nav" aria-label="Main">
+    <ul>
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Jandiala Guru &middot; Punjab</p>
+        <h1>Jewellery made for <span class="gold-text">moments that last</span></h1>
+        <p class="lead">Gold, diamond, silver and bridal pieces, chosen with care at Mana Chowk.</p>
+        <div class="cta">
+          <a class="btn btn--solid" href="#visit">Visit the Store</a>
+          <a class="btn" href="#collections">Explore Collections</a>
+        </div>
+        <ul class="chips" aria-label="How we work">
+          <li>Clear pricing</li><li>Itemised bill</li><li>No-pressure service</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <canvas id="gem" aria-label="Rotating 3D diamond ring" role="img"></canvas>
+        <div class="hint"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Gold</span><span>Diamond</span><span>Bridal Sets</span><span>Silver</span><span>Rings</span><span>Necklaces</span><span>Bangles</span><span>Earrings</span>
+      <span>Gold</span><span>Diamond</span><span>Bridal Sets</span><span>Silver</span><span>Rings</span><span>Necklaces</span><span>Bangles</span><span>Earrings</span>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <section id="collections">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Collections</p>
+        <h2>Pieces for every <span class="gold-text">occasion</span></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="grid">
+        <div class="tilt-wrap reveal"><article class="card tilt">
+          <img loading="lazy" alt="Gold chain necklace" src="images/gold_jewellery.png" onerror="this.remove()">
+          <div><h3>Gold</h3><p>Classic and contemporary designs for daily wear and celebrations.</p></div>
+        </article></div>
+        <div class="tilt-wrap reveal"><article class="card tilt">
+          <img loading="lazy" alt="Gold heart pendant necklace with rings" src="images/diamond_jewellery.png" onerror="this.remove()">
+          <div><h3>Diamond</h3><p>Brilliant stones set in elegant, timeless settings.</p></div>
+        </article></div>
+        <div class="tilt-wrap reveal"><article class="card tilt">
+          <img loading="lazy" alt="Woman wearing silver and gold necklaces" src="images/bridal_jewellery.png" onerror="this.remove()">
+          <div><h3>Bridal</h3><p>Complete sets to make the most important day unforgettable.</p></div>
+        </article></div>
+        <div class="tilt-wrap reveal"><article class="card tilt">
+          <img loading="lazy" alt="Silver and gold pendant necklace" src="images/silver_jewellery.png" onerror="this.remove()">
+          <div><h3>Silver</h3><p>Graceful silver jewellery and gifting pieces.</p></div>
+        </article></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALLAX QUOTE BAND -->
+  <section class="band">
+    <blockquote class="reveal">Jewellery is not just worn. It is remembered.</blockquote>
+    <cite class="reveal">Mana Jewellers &middot; Jandiala Guru</cite>
+  </section>
+
+  <!-- OCCASIONS -->
+  <section id="occasions">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Shop by Occasion</p>
+        <h2>Every celebration, <span class="gold-text">beautifully marked</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="occasions">
+        <div class="occ reveal"><div class="ph"><img loading="lazy" alt="Two wedding rings on a wooden table" src="images/weddings.png" onerror="this.remove()"></div><div class="body"><h3>Weddings</h3><p>Bridal sets, rings and family gifts for the biggest day of the year.</p></div></div>
+        <div class="occ reveal"><div class="ph"><img loading="lazy" alt="Gold diamond ring on white cloth" src="images/festivals.png" onerror="this.remove()"></div><div class="body"><h3>Festivals</h3><p>Diwali, Dhanteras, Karwa Chauth and more. Find something special to mark the day.</p></div></div>
+        <div class="occ reveal"><div class="ph"><img loading="lazy" alt="Jewellery gift boxes" src="images/gifting.png" onerror="this.remove()"></div><div class="body"><h3>Gifting</h3><p>Anniversaries, birthdays and new beginnings, with a gift that is kept for years.</p></div></div>
+        <div class="occ reveal"><div class="ph"><img loading="lazy" alt="Diamond and sapphire ring" src="images/everyday.png" onerror="this.remove()"></div><div class="body"><h3>Everyday</h3><p>Light, wearable pieces for daily elegance.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Gallery</p>
+        <h2>A closer <span class="gold-text">look</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gallery reveal">
+        <figure><button type="button" aria-label="Enlarge photo: Pink and silver necklace"><img loading="lazy" alt="Pink and silver necklace" src="images/Diamond Necklace on Black Velvet-2.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Diamond engagement ring on a black box"><img loading="lazy" alt="Diamond engagement ring on a black box" src="images/Regal Gold Bridal Jewelry Display-3.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Gold and gemstone crown"><img loading="lazy" alt="Gold and gemstone crown" src="images/Ornate Gold Jewelry on Velvet-1.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Assorted ring collection"><img loading="lazy" alt="Assorted ring collection" src="images/Elegant Silver Jewelry on Velvet.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Gold heart necklace on pink satin"><img loading="lazy" alt="Gold heart necklace on pink satin" src="images/gold_bangles.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Diamond and sapphire snake ring"><img loading="lazy" alt="Diamond and sapphire snake ring" src="images/temple_necklace.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Two rings on a wooden table"><img loading="lazy" alt="Two rings on a wooden table" src="images/gold_bracelet.png" onerror="this.closest('figure').remove()"></button></figure>
+        <figure><button type="button" aria-label="Enlarge photo: Gold chain necklace on a white surface"><img loading="lazy" alt="Gold chain necklace on a white surface" src="images/gold_jewellery.png" onerror="this.closest('figure').remove()"></button></figure>
+      </div>
+      <dialog class="lb" id="lightbox" aria-label="Photo viewer"><img alt=""><p></p><button class="btn close" type="button">Close</button></dialog>
+      <p class="credit"></p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">About Us</p>
+        <h2>Trust is the <span class="gold-text">finest metal</span></h2>
+        <div class="divider"></div>
+        <p>Buying jewellery is personal. At Mana Jewellers we want every customer to leave with a clear price, a clear bill and a piece they love, after a conversation without pressure.</p>
+        <p>Find us at Mana Chowk on Ghas Mandi Road, Jandiala Guru.</p>
+        <figure class="about-photo"><img loading="lazy" alt="Jewellery on display in a glass case" src="https://unsplash.com/photos/mPhTmhQLkfE/download?force=true&w=1000" onerror="this.parentElement.remove()"></figure>
+      </div>
+      <ul class="values reveal">
+        <li><h3>Clear pricing</h3><p>Weight, rate and making charges explained before you decide.</p></li>
+        <li><h3>Proper paperwork</h3><p>Every purchase backed by a proper bill.</p></li>
+        <li><h3>Respectful service</h3><p>Take your time. Ask anything. Buy only when you are happy.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BUYING GUIDE -->
+  <section id="guide">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Buying Guide</p>
+        <h2>Buy jewellery with <span class="gold-text">confidence</span></h2>
+        <div class="divider"></div>
+        <p>Four simple habits that protect you at any jeweller.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3>Check the hallmark</h3><p>Look for the BIS hallmark on gold jewellery.</p></div>
+        <div class="step reveal"><h3>Ask for details</h3><p>Weight, purity, rate of the day and making charges.</p></div>
+        <div class="step reveal"><h3>Get an itemised bill</h3><p>Keep it safe. It matters for exchange and resale.</p></div>
+        <div class="step reveal"><h3>Take your time</h3><p>Compare, think, and buy only when you feel sure.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="reviews">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Reviews</p>
+        <h2>What our customers <span class="gold-text">say</span></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="rating-box reveal">
+        <div class="score">3.1</div>
+        <div>
+          <span class="stars" style="--fill:62%" role="img" aria-label="Rated 3.1 out of 5"><i></i></span>
+          <div class="rating-meta">Based on 42 Google reviews</div>
+        </div>
+      </div>
+
+      <!-- Real customer reviews render here. Add them in the REVIEWS list in the script below. -->
+      <div class="review-list" id="reviewList"></div>
+
+      <div class="review-cta reveal">
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mana+Jewellers+Jandiala+Guru">Read all Google reviews</a>
+        <a class="btn btn--solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mana+Jewellers+Jandiala+Guru">Write a review</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Good <span class="gold-text">questions</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="faq reveal">
+        <details><summary>Where is the store?</summary><p>Ghas Mandi Rd, near Mana Chowk, Jandiala Guru, Punjab 143115. Use the map below for directions.</p></details>
+        <details><summary>When do you open?</summary><p>The store opens at 11 am. Call 098722 11117 to confirm today's timings before you visit.</p></details>
+        <details><summary>How can I enquire about a piece?</summary><p>Use the enquiry form below, send us a WhatsApp message, or call the store.</p></details>
+        <details><summary>What should I check when buying gold?</summary><p>Ask for the weight, purity, the rate used and the making charges, look for the BIS hallmark, and always take an itemised bill.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT: MAP + FORM -->
+  <section id="visit" class="visit">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Visit Us</p>
+        <h2>Find us at <span class="gold-text">Mana Chowk</span></h2>
+        <div class="divider"></div>
+
+        <dl class="info">
+          <div><dt>Address</dt><dd>Ghas Mandi Rd, near Mana Chowk,<br>Jandiala Guru, Punjab 143115</dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+919872211117">098722 11117</a></dd></div>
+          <div><dt>Hours</dt><dd>Opens 11 am</dd></div>
+        </dl>
+
+        <div class="map">
+          <iframe title="Map showing Mana Jewellers in Jandiala Guru" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                  src="https://maps.google.com/maps?q=Mana%20Jewellers%20Jandiala%20Guru&z=16&output=embed"></iframe>
+        </div>
+        <p style="margin-top:1.2rem">
+          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mana+Jewellers+Jandiala+Guru">Open in Google Maps</a>
+        </p>
+      </div>
+
+      <!-- Replace YOUR_FORM_ID in the script with the ID from formspree.io -->
+      <form id="enquiry" class="reveal" novalidate>
+        <p class="eyebrow" style="margin:0">Send an enquiry</p>
+        <div class="row">
+          <div><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
+          <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+        </div>
+        <div><label for="email">Email (optional)</label><input id="email" name="email" type="email" autocomplete="email"></div>
+        <div>
+          <label for="interest">I am interested in</label>
+          <select id="interest" name="interest">
+            <option>Gold jewellery</option><option>Diamond jewellery</option><option>Bridal set</option><option>Silver jewellery</option><option>Something else</option>
+          </select>
+        </div>
+        <div><label for="msg">Message</label><textarea id="msg" name="message" rows="4"></textarea></div>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="actions">
+          <button class="btn btn--solid" type="submit" id="sendBtn">Send enquiry</button>
+          <button class="btn" type="button" id="waBtn">WhatsApp instead</button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="logo">MANA JEWELLERS</div>
+  <nav aria-label="Footer"><ul>
+    <li><a href="#collections">Collections</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#about">About</a></li><li><a href="#faq">FAQ</a></li><li><a href="#visit">Visit</a></li>
+  </ul></nav>
+  <p>Ghas Mandi Rd, near Mana Chowk, Jandiala Guru, Punjab 143115 &middot; <a href="tel:+919872211117">098722 11117</a></p>
+  <p>&copy; <span id="year"></span> Mana Jewellers &middot; <span lang="pa">ਮਾਨਾ ਜਿਵੈਲਰਸ</span></p>
+</footer>
+
+<a class="float-call" href="tel:+919872211117">Call</a>
+<a class="float-wa" target="_blank" rel="noopener" href="https://wa.me/919872211117?text=Hello%20Mana%20Jewellers">WhatsApp us</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ================= CONFIG: edit these ================= */
+const FORMSPREE_ID   = "YOUR_FORM_ID";   // from formspree.io, e.g. "xyzabcde"
+const WHATSAPP_NUMBER = "919872211117";  // country code + number, digits only
+
+// Only add REAL reviews, with the customer's permission or from a public source you credit.
+// Example: { name: "Customer name", text: "Their words.", source: "Google review" }
+const REVIEWS = [];
+
+/* ================= Mobile menu ================= */
+const nav = document.getElementById("nav");
+const menuBtn = document.querySelector(".menu-btn");
+menuBtn.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", open);
+});
+nav.addEventListener("click", e => {
+  if (e.target.tagName === "A") { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
+});
+
+/* ================= Header on scroll ================= */
+const header = document.querySelector("header");
+const onScroll = () => header.classList.toggle("scrolled", scrollY > 40);
+onScroll();
+addEventListener("scroll", onScroll, { passive: true });
+
+/* ================= Reveal on scroll ================= */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* ================= Reviews (rendered safely with textContent) ================= */
+(function () {
+  const list = document.getElementById("reviewList");
+  if (!REVIEWS.length) { list.remove(); return; }
+  REVIEWS.forEach(r => {
+    const card = document.createElement("article"); card.className = "review reveal visible";
+    const p = document.createElement("p"); p.textContent = "\u201C" + r.text + "\u201D";
+    const f = document.createElement("footer"); f.textContent = r.name + (r.source ? " \u00B7 " + r.source : "");
+    card.append(p, f); list.append(card);
+  });
+})();
+
+/* ================= 3D tilt on cards ================= */
+(function () {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || matchMedia("(hover: none)").matches) return;
+  document.querySelectorAll(".tilt").forEach(card => {
+    card.addEventListener("pointermove", e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+    });
+    card.addEventListener("pointerleave", () => { card.style.transform = ""; });
+  });
+})();
+
+/* ================= 3D diamond ring (Three.js) ================= */
+(function () {
+  const canvas = document.getElementById("gem");
+  if (!canvas || !window.THREE) { canvas && (canvas.parentElement.hidden = true); return; }
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true }); }
+  catch (e) { canvas.parentElement.hidden = true; return; }   // no WebGL: hide gracefully
+
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+  camera.position.set(0, 0.2, 10);
+
+  // lights
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const key = new THREE.DirectionalLight(0xfff1cc, 1.3); key.position.set(3, 5, 6); scene.add(key);
+  const warm = new THREE.PointLight(0xc9a24b, 1.8, 30); warm.position.set(-5, 2, 4); scene.add(warm);
+  const cool = new THREE.PointLight(0x9bbcff, 1.0, 30); cool.position.set(5, -3, -3); scene.add(cool);
+
+  const ring = new THREE.Group(); scene.add(ring);
+
+  // gold band
+  const band = new THREE.Mesh(
+    new THREE.TorusGeometry(1.6, 0.24, 32, 120),
+    new THREE.MeshStandardMaterial({ color: 0xc9a24b, metalness: 0.8, roughness: 0.25 })
+  );
+  ring.add(band);
+
+  // diamond = crown (wide top) + pavilion (point down), 8 flat facets each
+  const gemMat = new THREE.MeshPhysicalMaterial({
+    color: 0xe6f4ff, metalness: 0.1, roughness: 0.04, flatShading: true,
+    clearcoat: 1, emissive: 0x1b2a40, emissiveIntensity: 0.4
+  });
+  const gem = new THREE.Group();
+  const crown = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.95, 0.42, 8, 1), gemMat);
+  crown.position.y = 0.21;
+  const pavilion = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.02, 0.95, 8, 1), gemMat);
+  pavilion.position.y = -0.475;
+  gem.add(crown, pavilion);
+  gem.position.y = 1.6 + 0.2 + 0.85;
+  ring.add(gem);
+
+  // sparkle dust
+  const N = 140, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const r = 3 + Math.random() * 2.2, a = Math.random() * Math.PI * 2;
+    pos[i * 3] = Math.cos(a) * r; pos[i * 3 + 1] = (Math.random() - 0.5) * 6; pos[i * 3 + 2] = Math.sin(a) * r;
+  }
+  const dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: 0xe8cf8f, size: 0.05, transparent: true, opacity: 0.8 }));
+  scene.add(dust);
+
+  ring.position.y = -0.6;
+  ring.rotation.x = 0.35;
+
+  // sizing
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(canvas); resize();
+
+  // interaction: drag to spin, otherwise slow auto-spin + mouse parallax
+  let dragging = false, lastX = 0, velocity = 0.006, tiltTarget = 0.35;
+  canvas.addEventListener("pointerdown", e => { dragging = true; lastX = e.clientX; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointerup",   () => { dragging = false; });
+  canvas.addEventListener("pointermove", e => {
+    if (dragging) { velocity = (e.clientX - lastX) * 0.01; ring.rotation.y += velocity; lastX = e.clientX; }
+    const r = canvas.getBoundingClientRect();
+    tiltTarget = 0.35 + ((e.clientY - r.top) / r.height - 0.5) * 0.5;
+  });
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let visible = true;
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(canvas);
+
+  const clock = new THREE.Clock();
+  function frame() {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    const t = clock.getElapsedTime();
+    if (!dragging && !reduce) {
+      velocity += (0.006 - velocity) * 0.04;       // ease back to the slow auto-spin
+      ring.rotation.y += velocity;
+    }
+    ring.rotation.x += (tiltTarget - ring.rotation.x) * 0.05;
+    ring.position.y = -0.6 + (reduce ? 0 : Math.sin(t * 1.2) * 0.08);   // gentle float
+    gem.rotation.y = reduce ? 0 : t * 0.5;
+    dust.rotation.y = reduce ? 0 : t * 0.05;
+    renderer.render(scene, camera);
+  }
+  frame();
+})();
+
+/* ================= Enquiry form: Formspree + WhatsApp ================= */
+(function () {
+  const form = document.getElementById("enquiry");
+  const status = document.getElementById("status");
+  const sendBtn = document.getElementById("sendBtn");
+  const say = (msg, type) => { status.textContent = msg; status.className = "status " + (type || ""); };
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!form.name.value.trim() || !form.phone.value.trim()) { say("Please enter your name and phone number.", "err"); return; }
+    if (FORMSPREE_ID === "YOUR_FORM_ID") { say("This form is not connected yet. Please use WhatsApp or call the store.", "err"); return; }
+
+    sendBtn.disabled = true; say("Sending...");
+    try {
+      const res = await fetch("https://formspree.io/f/" + FORMSPREE_ID, {
+        method: "POST", body: new FormData(form), headers: { Accept: "application/json" }
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      form.reset(); say("Thank you! We have received your enquiry and will contact you soon.", "ok");
+    } catch (err) {
+      say("Sorry, that did not send. Please try WhatsApp or call 098722 11117.", "err");
+    } finally { sendBtn.disabled = false; }
+  });
+
+  document.getElementById("waBtn").addEventListener("click", () => {
+    const text =
+      `Hello Mana Jewellers, I am ${form.name.value.trim() || "a customer"}.\n` +
+      `I am interested in: ${form.interest.value}.\n` + form.message.value.trim();
+    open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+  });
+})();
+
+/* ================= Gallery lightbox ================= */
+(function () {
+  const dlg = document.getElementById("lightbox");
+  if (!dlg || !dlg.showModal) return;
+  const big = dlg.querySelector("img"), cap = dlg.querySelector("p");
+  document.querySelectorAll(".gallery button").forEach(b => b.addEventListener("click", () => {
+    const img = b.querySelector("img");
+    big.src = img.src.replace(/w=\d+/, "w=1600"); big.alt = img.alt; cap.textContent = img.alt;
+    dlg.showModal();
+  }));
+  dlg.addEventListener("click", e => { if (e.target !== big) dlg.close(); });
+})();
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
